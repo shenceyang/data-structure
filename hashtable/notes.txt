@@ -1,0 +1,44 @@
+
+-HASHTABLE operation:
+    insert  O(1)
+    search  O(1)
+    delete  O(1)
+bc hash function tell us where we should store an obj or look it up so we dont have to iterate over the entire array.
+
+- insert node with same key but diff value: value in hashmap updated.
+- HASHMAP accept NULL key and value 
+
+
+------------------------------------ Hash Function ------------------------------------ 
+-hash function: value -> diff value(hash) 
+
+- hash function is deterministic: everytime it gives same input, it return same value 
+
+check hashfunction.py for implementation
+
+------------------------------------ Hash Function ------------------------------------ 
+
+
+
+------------------------------------ Collision ------------------------------------ 
+ -collision: two distinct keys generate the same hash value
+
+ -how to solve?
+ 1. Chaining: each cell in our array point to a linked list. not gonna store value in the array but instead in the linked list.
+    if have collision, add new item at the end of the linked list.
+
+ 2. Open addressing: find a diff slot for storing the second value.
+    (drawback: if table is full, we cant store)
+        2.1 linear probing: we start from the current slot, if its full, we go forward until we find an empty slot.
+                linear probing = (hash(key) + i )% table_size 
+                    problem: (i = 1,2,3,4 ...)form a cluster and slow down the speed
+
+        2.2 quadratic probing : (hash(key) + i^2) % table_size 
+                in this case: i = 1,4,9,... spread out more widely
+                problem: since we doing big jump, we may jump back to the start of the array and be an infinite loop
+        
+        2.3  double hashing: use a separate hash function to calculate the #of steps
+                eg. hash2(key) = prime - (key%prime)  //use it when slot is full
+                    double hashing= (hash1(key) + i * hash2(key)) % table_size
+
+------------------------------------ Collision ------------------------------------ 
